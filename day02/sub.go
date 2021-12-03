@@ -1,20 +1,17 @@
 package main
 
 import (
-	"bufio"
+	utils "advent/utils"
 	"fmt"
-	"log"
-	"os"
 	"regexp"
-	"strconv"
 )
 
 func main() {
-	day1()
-	day2()
+	part1()
+	part2()
 }
 
-func day1() {
+func part1() {
 	horizontal, vertical := 0, 0
 	instructions := readInput()
 	for _, instruction := range instructions {
@@ -24,7 +21,7 @@ func day1() {
 	fmt.Println(horizontal * vertical)
 }
 
-func day2() {
+func part2() {
 	horizontal, depth, aim := 0, 0, 0
 	instructions := readInput()
 	for _, instruction := range instructions {
@@ -41,24 +38,12 @@ type instruction struct {
 
 func readInput() (result []instruction) {
 	instructionRE := regexp.MustCompile(`^(down|up|forward) (\d)+$`)
-
-	file, err := os.Open("input.txt")
-	if err != nil {
-		panic(err)
-	}
-	defer func(file *os.File) {
-		err := file.Close()
-		if err != nil {
-			panic(err)
-		}
-	}(file)
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
+	lines := utils.ReadInput()
+	for _, l := range lines {
 		i := instruction{}
-		line := scanner.Text()
-		if instructionRE.MatchString(line) {
-			fields := instructionRE.FindStringSubmatch(line)
-			delta := ToInt(fields[2])
+		if instructionRE.MatchString(l) {
+			fields := instructionRE.FindStringSubmatch(l)
+			delta := utils.ToInt(fields[2])
 			switch fields[1] {
 			case "down":
 				i.vertical = delta
@@ -70,22 +55,10 @@ func readInput() (result []instruction) {
 				panic("Did not recognize " + fields[1])
 			}
 		} else {
-			if line != "" {
-				panic("Could not parse " + line)
-			}
+			panic("Could not parse " + l)
 		}
 		result = append(result, i)
 	}
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
-	return
-}
 
-func ToInt(s string) (i int) {
-	i, err := strconv.Atoi(s)
-	if err != nil {
-		panic(err)
-	}
 	return
 }
