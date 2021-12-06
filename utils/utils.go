@@ -29,9 +29,7 @@ func ReadInput() (result []string) {
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := scanner.Text()
-		if line != "" {
-			result = append(result, line)
-		}
+		result = append(result, line)
 	}
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
