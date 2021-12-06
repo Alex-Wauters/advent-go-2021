@@ -2,6 +2,7 @@ package utils
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -35,4 +36,15 @@ func ReadInput() (result []string) {
 		log.Fatal(err)
 	}
 	return result
+}
+
+func Position(row, col int) string {
+	return fmt.Sprintf("%v,%v", row, col)
+}
+
+func SortNumbers(a, b int) (c, d int) {
+	if a < b {
+		return a, b
+	}
+	return b, a
 }
