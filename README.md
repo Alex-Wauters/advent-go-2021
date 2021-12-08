@@ -10,5 +10,6 @@ Advent of Code is a series of small programming puzzles for a variety of skill l
 See https://golang.org/
 For an interactive tour of go, visit https://tour.golang.org
 
+To run any of the solutions, try `go run *.go` in the directory of any solution.
 
 ![lets go](http://i.imgur.com/sDBaVEy.png)
