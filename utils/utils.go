@@ -48,3 +48,10 @@ func SortNumbers(a, b int) (c, d int) {
 	}
 	return b, a
 }
+
+func Abs(a, b int) int {
+	if a < b {
+		return b - a
+	}
+	return a - b
+}
